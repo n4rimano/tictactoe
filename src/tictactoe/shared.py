@@ -1,7 +1,9 @@
-# shared.py
+# Copyright (C) 2026 Nariman Seyfulayev
+# SPDX-License-Identifier: GPL-3.0-only
 
+# Local modules
 from .terminators import clear_line
-from .ansi_colors import ansi, RESET, foreground_colors, background_colors, text_styles
+from .ansi_colors import ansi, RESET
 
 #==========Varialbes==========#
 

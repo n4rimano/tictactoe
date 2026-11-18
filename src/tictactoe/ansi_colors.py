@@ -1,12 +1,11 @@
-# ansi_colors.py
+# Copyright (C) 2026 Nariman Seyfulayev
+# SPDX-License-Identifier: GPL-3.0-only
 
 # \033[<sequence>m
 # \033 escape char
 # [ introduces CSI(Control Sequence Introducer)
 # <parameters> = one of ansi codes
 # m tells the terminal: apply these visual styles 
-
-# ansi_colors.py
 
 # ANSI escape sequence builder
 def ansi(code: int) -> str:

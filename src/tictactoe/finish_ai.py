@@ -1,3 +1,6 @@
+# Copyright (C) 2026 Nariman Seyfulayev
+# SPDX-License-Identifier: GPL-3.0-only
+
 def find_best_move(board, player, opponent):
     # 1. Can we win?
     for i in range(9):

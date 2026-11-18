@@ -1,9 +1,11 @@
-# move.py
+# Copyright (C) 2026 Nariman Seyfulayev
+# SPDX-License-Identifier: GPL-3.0-only
 
+# Standard library
 from random import choice
 
-from .shared import weapons, board
-from .shared import get_available_cells
+# Local modules
+from .shared import weapons, board, get_available_cells
 from .prompt import prompt_move
 
 def apply_move(move: int, weapon: str) -> None:  # Internal func

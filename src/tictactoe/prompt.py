@@ -1,9 +1,9 @@
-# prompt.py
+# Copyright (C) 2026 Nariman Seyfulayev
+# SPDX-License-Identifier: GPL-3.0-only
 
-
+# Local modules
 from .terminators import clear_line, clear_screen, exit_gracefully
-from .shared import weapons, board, RESET
-from .shared import get_available_cells, ansi
+from .shared import weapons, board, RESET, get_available_cells, ansi
 
 
 def prompt_weapon() -> int:

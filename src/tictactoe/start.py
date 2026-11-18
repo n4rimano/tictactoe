@@ -1,8 +1,10 @@
-# start.py
+# Copyright (C) 2026 Nariman Seyfulayev
+# SPDX-License-Identifier: GPL-3.0-only
 
-
+# Standard library
 from random import randrange
 
+# Local modules
 from .prompt import prompt_weapon
 
 

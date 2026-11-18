@@ -1,10 +1,18 @@
-# main.py
+# Copyright (C) 2026 Nariman Seyfulayev
+# SPDX-License-Identifier: GPL-3.0-only
 
+# Local modules
 from .terminators import clear_line, clear_screen
 from .start import start
 from .move import move
-from .shared import weapons, board
-from .shared import generate_box, clear_box, check_winner, check_draw
+from .shared import (
+    board,
+    check_draw,
+    check_winner,
+    clear_box,
+    generate_box,
+    weapons
+)
 
 def main():
     clear_screen()
