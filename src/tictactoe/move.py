@@ -1,9 +1,10 @@
 # move.py
 
 from random import choice
-from shared import weapons, board
-from shared import get_available_cells
-from prompt import prompt_move
+
+from .shared import weapons, board
+from .shared import get_available_cells
+from .prompt import prompt_move
 
 def apply_move(move: int, weapon: str) -> None:  # Internal func
     for i, row in enumerate(board):

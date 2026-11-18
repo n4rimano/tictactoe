@@ -1,9 +1,9 @@
 # prompt.py
 
 
-from terminators import clear_line, clear_screen, exit_gracefully
-from shared import weapons, board, RESET
-from shared import get_available_cells, ansi
+from .terminators import clear_line, clear_screen, exit_gracefully
+from .shared import weapons, board, RESET
+from .shared import get_available_cells, ansi
 
 
 def prompt_weapon() -> int:

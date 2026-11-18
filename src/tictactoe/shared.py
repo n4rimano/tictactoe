@@ -1,7 +1,7 @@
 # shared.py
 
-from terminators import clear_line
-from ansi_colors import ansi, RESET, foreground_colors, background_colors, text_styles
+from .terminators import clear_line
+from .ansi_colors import ansi, RESET, foreground_colors, background_colors, text_styles
 
 #==========Varialbes==========#
 

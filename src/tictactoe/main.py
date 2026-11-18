@@ -1,10 +1,10 @@
 # main.py
 
-from terminators import clear_line, clear_screen
-from start import start
-from move import move
-from shared import weapons, board
-from shared import generate_box, clear_box, check_winner, check_draw
+from .terminators import clear_line, clear_screen
+from .start import start
+from .move import move
+from .shared import weapons, board
+from .shared import generate_box, clear_box, check_winner, check_draw
 
 def main():
     clear_screen()

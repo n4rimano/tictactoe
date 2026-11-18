@@ -41,7 +41,7 @@ uv sync
 Run the application from the project directory:
 
 ```bash
-uv run python main.py
+uv run tictactoe
 ```
 
 ## Flowchart

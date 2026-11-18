@@ -2,7 +2,8 @@
 
 
 from random import randrange
-from prompt import prompt_weapon
+
+from .prompt import prompt_weapon
 
 
 def start() -> tuple[int, int, int]:
