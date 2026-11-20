@@ -44,6 +44,9 @@ Run the application from the project directory:
 uv run tictactoe
 ```
 
+## Demo
+![Tic-tac-toe gameplay](assets/demo.gif)
+
 ## Flowchart
 
 ![Tic-Tac-Toe Application Flowchart](docs/tictactoeFlowChart.png)
