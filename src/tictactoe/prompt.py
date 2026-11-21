@@ -2,15 +2,23 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
 # Local modules
-from .terminators import clear_line, clear_screen, exit_gracefully
-from .shared import weapons, board, RESET, get_available_cells, ansi
+from .terminal import clear_line, clear_screen, exit_gracefully
+from .shared import (
+    weapons,
+    board,
+    get_available_cells,
+    ansi_red,
+    ansi_yellow,
+    ansi_magenta,
+    ansi_bold,
+    RESET
+)
 
-
-def prompt_weapon() -> int:
+def weapon() -> int:
     while True:
         try:
             char = input(
-            f"Pick your weapon {weapons[1]}/{weapons[0]} or {ansi(95)}{ansi(1)}q{RESET} to quit: ").lower()
+            f"Pick your weapon {weapons[1]}/{weapons[0]} or {ansi_magenta}{ansi_bold}q{RESET} to quit: ").lower()
             clear_line()
             if char == "q":
                 clear_screen()
@@ -24,11 +32,11 @@ def prompt_weapon() -> int:
             exit_gracefully()
 
 
-def prompt_move() -> int:
+def move() -> int:
     while True:
         try:
             # Quit on start or ignore bad input
-            user_input = input(f"Your move or {ansi(95)}{ansi(1)}q{RESET} to quit: ").lower()
+            user_input = input(f"Your move or {ansi_magenta}{ansi_bold}q{RESET} to quit: ").lower()
             clear_line()
             if user_input == "q":
                 clear_screen()
@@ -42,7 +50,7 @@ def prompt_move() -> int:
                 continue
             if cell not in get_available_cells(board):
                 continue
-            return cell    
+            return cell
         except KeyboardInterrupt:
             clear_screen()
             exit_gracefully()

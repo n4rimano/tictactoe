@@ -2,20 +2,21 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
 # Local modules
-from .terminators import clear_line
-from .ansi_colors import ansi, RESET
+from .terminal import clear_line
 
-#==========Varialbes==========#
+ansi_red = "\033[91m"
+ansi_yellow = "\033[93m"
+ansi_magenta = "\033[95m"
+ansi_bold = "\033[1m"
+RESET = "\033[0m"
 
 weapons = (
-           f"{ansi(93)}{ansi(1)}o{RESET}",
-           f"{ansi(91)}{ansi(1)}x{RESET}"
+           f"{ansi_yellow}o{RESET}",
+           f"{ansi_red}x{RESET}"
            )
 
 board = tuple([[(i * 3 + 1 + j) for j in range(3)] for i in range(3)])
 
-
-#==========Functions==========#
 
 def get_move_count(board) -> int:
     return sum(1 for row in board for cell in row if cell in weapons)

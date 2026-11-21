@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
 # Local modules
-from .terminators import clear_line, clear_screen
-from .start import start
+from .terminal import clear_line, clear_screen
+from tictactoe import game_setup
 from .move import move
 from .shared import (
     board,
@@ -16,7 +16,7 @@ from .shared import (
 
 def main():
     clear_screen()
-    init_player, user_weapon, pc_weapon = start()
+    init_player, user_weapon, pc_weapon = game_setup.initialize()
     clear_line()
 
     if init_player == 0:
@@ -45,7 +45,7 @@ def main():
             print(generate_box(board))
             next_player = (next_player + 1) % 2
 
-    else: 
+    else:
         print(f"PC picked {weapons[pc_weapon]}\n"
               f"User assigned {weapons[user_weapon]}")
         move(init_player, user_weapon, pc_weapon)
