@@ -1,74 +1,45 @@
 # Copyright (C) 2026 Nariman Seyfulayev
 # SPDX-License-Identifier: GPL-3.0-only
 
-# Local modules
-from .terminal import clear_line, clear_screen
-from tictactoe import game_setup
-from .move import move
-from .shared import (
-    board,
-    check_draw,
-    check_winner,
-    clear_box,
-    generate_box,
-    weapons
-)
+"""Game entry point and turn coordination."""
 
-def main():
-    clear_screen()
-    init_player, user_weapon, pc_weapon = game_setup.initialize()
-    clear_line()
+from . import display, execute, initialize, terminal
+from .board import WEAPONS, new_board
+from .display import colored_weapon
+from .rules import is_draw, winner
 
-    if init_player == 0:
-        print(f"User picked {weapons[user_weapon]}\n"
-              f"PC assigned {weapons[pc_weapon]}")
-        print(generate_box(board))
-        move(init_player, user_weapon, pc_weapon)
-        clear_box()
-        print(generate_box(board))
 
-        next_player = (init_player + 1) % 2
-        while True:
-            move(next_player, user_weapon, pc_weapon)
-            winner = check_winner(board, user_weapon, pc_weapon)
-            if winner[0]:
-                clear_box()
-                print(generate_box(board))
-                print(f"Winner: {winner[1]}\n")
-                return
-            if check_draw(board, user_weapon, pc_weapon):
-                clear_box()
-                print(generate_box(board))
-                print("Draw\n")
-                return
-            clear_box()
-            print(generate_box(board))
-            next_player = (next_player + 1) % 2
+def main() -> None:
+    board = new_board()
+    terminal.clear_screen()
+    first_player, user_weapon, pc_weapon = initialize.game()
+    # prompt.weapon() already clears its own input line when used.
 
+    if first_player == 0:
+        print(f"User picked {colored_weapon(WEAPONS[user_weapon])}")
+        print(f"PC assigned {colored_weapon(WEAPONS[pc_weapon])}")
     else:
-        print(f"PC picked {weapons[pc_weapon]}\n"
-              f"User assigned {weapons[user_weapon]}")
-        move(init_player, user_weapon, pc_weapon)
-        print(generate_box(board))
+        print(f"PC picked {colored_weapon(WEAPONS[pc_weapon])}")
+        print(f"User assigned {colored_weapon(WEAPONS[user_weapon])}")
 
-        next_player = (init_player + 1) % 2
-        while True:
-            move(next_player, user_weapon, pc_weapon)
-            winner = check_winner(board, user_weapon, pc_weapon)
-            if winner[0]:
-                clear_box()
-                print(generate_box(board))
-                print(f"Winner: {winner[1]}\n")
-                return
-            if check_draw(board, user_weapon, pc_weapon):
-                clear_box()
-                print(generate_box(board))
-                print("Draw\n")
-                return
-            clear_box()
-            print(generate_box(board))
-            next_player = (next_player + 1) % 2
+    next_player = first_player
+    display.show_board(board)
+    while True:
+        execute.move(board, next_player, user_weapon, pc_weapon)
+        # Input handling removes the prompt line; only the seven board lines
+        # remain above the cursor, so replace them instead of appending.
+        display.clear_box()
+        display.show_board(board)
+        winning_weapon = winner(board)
+        if winning_weapon is not None:
+            winning_player = "User" if winning_weapon == WEAPONS[user_weapon] else "PC"
+            print(f"Winner: {winning_player} ({colored_weapon(winning_weapon)})\n")
+            return
+        if is_draw(board):
+            print("Draw\n")
+            return
+        next_player = 1 - next_player
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

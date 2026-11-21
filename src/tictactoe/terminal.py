@@ -1,19 +1,26 @@
 # Copyright (C) 2026 Nariman Seyfulayev
 # SPDX-License-Identifier: GPL-3.0-only
 
-# Standard Libraries
+"""Terminal control helpers."""
+
 import os
 import sys
 
 
-def clear_screen():
-    os.system("clear" if os.name == 'posix' else 'cls')
-
-def clear_line():
-    sys.stdout.flush()
-    sys.stdout.write("\033[F")  # Move the cursor up one line
-    sys.stdout.write("\033[K")  # Clear the entire line
+def clear_screen() -> None:
+    # Do not issue shell commands (or ANSI cursor operations) for redirected output.
+    if not sys.stdout.isatty():
+        return
+    sys.stdout.write("\033[2J\033[H")
     sys.stdout.flush()
 
-def exit_gracefully():
-    sys.exit(0)
+
+def clear_line() -> None:
+    if not sys.stdout.isatty():
+        return
+    sys.stdout.write("\033[1A\033[2K\r")
+    sys.stdout.flush()
+
+
+def exit_gracefully() -> None:
+    raise SystemExit(0)

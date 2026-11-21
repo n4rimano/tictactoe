@@ -1,56 +1,42 @@
 # Copyright (C) 2026 Nariman Seyfulayev
 # SPDX-License-Identifier: GPL-3.0-only
 
-# Local modules
-from .terminal import clear_line, clear_screen, exit_gracefully
-from .shared import (
-    weapons,
-    board,
-    get_available_cells,
-    ansi_red,
-    ansi_yellow,
-    ansi_magenta,
-    ansi_bold,
-    RESET
-)
+"""Interactive user input and validation."""
+
+from . import ansi, terminal
+from .board import Board, WEAPONS, available_cells
+from .display import colored_weapon
+
+
+def _read(prompt_text: str) -> str:
+    try:
+        response = input(prompt_text).strip().lower()
+    except (KeyboardInterrupt, EOFError):
+        terminal.clear_screen()
+        terminal.exit_gracefully()
+    terminal.clear_line()
+    if response == "q":
+        terminal.clear_screen()
+        terminal.exit_gracefully()
+    return response
+
 
 def weapon() -> int:
     while True:
-        try:
-            char = input(
-            f"Pick your weapon {weapons[1]}/{weapons[0]} or {ansi_magenta}{ansi_bold}q{RESET} to quit: ").lower()
-            clear_line()
-            if char == "q":
-                clear_screen()
-                exit_gracefully()
-            if len(char) == 1 and char in weapons[0]:
-                return 0
-            elif len(char) == 1 and char in weapons[1]:
-                return 1
-        except KeyboardInterrupt:
-            clear_screen()
-            exit_gracefully()
+        choice = _read(
+            f"Pick your weapon {colored_weapon(WEAPONS[1])}/{colored_weapon(WEAPONS[0])} or "
+            f"{ansi.MAGENTA}{ansi.BOLD}q{ansi.RESET} to quit: "
+        )
+        if choice in WEAPONS:
+            return WEAPONS.index(choice)
 
 
-def move() -> int:
+def move(board: Board) -> int:
     while True:
-        try:
-            # Quit on start or ignore bad input
-            user_input = input(f"Your move or {ansi_magenta}{ansi_bold}q{RESET} to quit: ").lower()
-            clear_line()
-            if user_input == "q":
-                clear_screen()
-                exit_gracefully()
-            if not user_input.isdigit():  # isdigit checks for . or other non digit input
-                continue
-
-            # Correct input
-            cell = int(user_input)
-            if cell not in range(1, 10):
-                continue
-            if cell not in get_available_cells(board):
-                continue
-            return cell
-        except KeyboardInterrupt:
-            clear_screen()
-            exit_gracefully()
+        choice = _read(
+            f"Your move (1-9) or {ansi.MAGENTA}{ansi.BOLD}q{ansi.RESET} to quit: "
+        )
+        if choice.isascii() and choice.isdecimal():
+            cell = int(choice)
+            if cell in available_cells(board):
+                return cell
