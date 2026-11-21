@@ -3,11 +3,9 @@
 
 """Board creation and mutation; no terminal or input dependencies."""
 
-from typing import TypeAlias
-
-Cell: TypeAlias = int | str
-Board: TypeAlias = list[list[Cell]]
 WEAPONS = ("o", "x")
+
+type Board = list[list[int | str]]
 
 
 def new_board() -> Board:

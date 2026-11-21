@@ -44,6 +44,12 @@ Run the application from the project directory:
 uv run tictactoe
 ```
 
+Run tests:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
 ## Demo
 ![Tic-tac-toe gameplay](assets/demo.gif)
 
@@ -52,8 +58,16 @@ uv run tictactoe
 ![Tic-Tac-Toe Application Flowchart](docs/tictactoeFlowChart.png)
 
 
-## Current limitations and next steps
-- The playable computer opponent selects a random legal move; finish_ai.py contains a separate strategy experiment but is not imported by the game and uses a different board representation.
+## Modules
+- `board.py`: fresh board, available cells, cell marking and weapon symbols.
+- `rules.py`: winner and draw detection.
+- `display.py`: ANSI colors and board layout.
+- `ai.py`: tactical computer strategy.
+- `prompt.py`: interactive input.
+- `execute.py`: run one turn.
+- `initialize.py`: select first player and weapons.
+- `main.py`: single game loop.
+- `terminal.py`, `ansi.py`: terminal utilities and colors.
 
 
 ## License

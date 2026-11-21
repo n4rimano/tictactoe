@@ -19,9 +19,9 @@ WINNING_LINES = (
 
 def winner(board: Board) -> str | None:
     for line in WINNING_LINES:
-        cells = [board[row][col] for row, col in line]
-        if cells[0] in WEAPONS and cells.count(cells[0]) == 3:
-            return cells[0]
+        for weapon in WEAPONS:
+            if all(board[row][col] == weapon for row, col in line):
+                return weapon
     return None
 
 
