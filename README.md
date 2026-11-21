@@ -22,7 +22,7 @@ A simple terminal-based Tic-Tac-Toe game developed in **Python 3** as a learning
 
 ## Requirements
 
-- Python 3 or newer.
+- Python 3.13.3 or newer.
 - A terminal with ANSI escape sequence support for the intended colours and screen updates.
 - Optional: 'uv' to manage the Python environment and run the program.
 
