@@ -1,6 +1,8 @@
 # Copyright (C) 2026 Nariman Seyfulayev
 # SPDX-License-Identifier: GPL-3.0-only
 
+""" ANSI style color codes """
+
 RED = "\033[91m"
 YELLOW = "\033[93m"
 MAGENTA = "\033[95m"

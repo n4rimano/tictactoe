@@ -7,14 +7,40 @@ WEAPONS = ("o", "x")
 
 type Board = list[list[int | str]]
 
-
+# Outer loop creates a list containing 3 inner lists.
+# Inner loop fills each inner list with 3 elements.
+# Formula numbers the elements from 1 to 9.
 def new_board() -> Board:
-    return [[row * 3 + col + 1 for col in range(3)] for row in range(3)]
+    return [[(row * 3 + 1) + col for col in range(3)] for row in range(3)]
 
+#def new_board() -> Board:
+#    return [
+#        [
+#            (row * 3 + 1) + col
+#            for col in range(3)
+#        ]
+#        for row in range(3)
+#    ]
+
+#def new_boar() -> Board:
+#    return [
+#        [
+#            (row * 3) + col
+#            for col in range(1, 4)
+#        ]
+#        for row in range(3)
+#    ]
 
 def available_cells(board: Board) -> list[int]:
     return [cell for row in board for cell in row if isinstance(cell, int)]
 
+#def available_cells(board: Board) -> list[int]:
+#    return [
+#        cell
+#        for row in board
+#        for cell in row
+#        if isinstance(cell, int)
+#    ]
 
 def mark(board: Board, cell: int, weapon: str) -> None:
     if weapon not in WEAPONS:
